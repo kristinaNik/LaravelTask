@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  reverseproxy:
+    container_name: reverseproxy
+    image: jwilder/nginx-proxy
+    depends_on:
+      - laravel-task
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - "80:80"
+      - "81:443"
+      - "443:443"
+
+
+  laravel-task:
+    container_name: laravel-task
+    image: webdevops/php-apache:7.4
+    volumes:
+        - ./src/laravel:/app
+    environment:
+        - WEB_DOCUMENT_ROOT=/app/public
+        - VIRTUAL_HOST=laravel-task.local
+    hostname: shopping-store.local
+    domainname: shopping-store.local
+
+
