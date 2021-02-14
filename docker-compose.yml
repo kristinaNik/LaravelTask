@@ -4,15 +4,12 @@ services:
   reverseproxy:
     container_name: reverseproxy
     image: jwilder/nginx-proxy
-    depends_on:
-      - laravel-task
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - "80:80"
       - "81:443"
       - "443:443"
-
 
   laravel-task:
     container_name: laravel-task
@@ -25,4 +22,18 @@ services:
     hostname: shopping-store.local
     domainname: shopping-store.local
 
-
+  rabbitmq1:
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq1"
+    volumes:
+      - ./enabled_plugins:/var/lib/rabbitmq/enabled_plugins
+    domainname: rabbitmq.local
