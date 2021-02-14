@@ -9,8 +9,13 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        $users = ['user1' => 'user1@email.com', 'user2' => 'user2@email.com'];
+        return view('form');
+     //   TestJob::dispatch($users);
+    }
 
-        TestJob::dispatch($users);
+
+    public function send(Request $request)
+    {
+       dd($request);
     }
 }

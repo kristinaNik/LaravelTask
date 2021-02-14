@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/', 'App\Http\Controllers\RegisterController@index')->name('index');
+Route::post('/send', 'App\Http\Controllers\RegisterController@send')->name('send');
