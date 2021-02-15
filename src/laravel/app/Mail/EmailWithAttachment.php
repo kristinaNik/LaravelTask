@@ -6,11 +6,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\File;
 
-class EmailForQueuing extends Mailable
+class EmailWithAttachment extends Mailable
 {
     use Queueable, SerializesModels;
-
 
     /**
      * Create a new message instance.
@@ -19,7 +19,7 @@ class EmailForQueuing extends Mailable
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
@@ -29,6 +29,8 @@ class EmailForQueuing extends Mailable
      */
     public function build()
     {
-        return $this->view('emails/email');
+        $img = File::get('public/image/mail_attachment.png');
+        return $this->view('emails/email')
+            ->attach($img);
     }
 }

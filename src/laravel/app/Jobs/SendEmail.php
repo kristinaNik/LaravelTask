@@ -3,12 +3,14 @@
 namespace App\Jobs;
 
 use App\Mail\EmailForQueuing;
+use App\Mail\EmailWithAttachment;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmail implements ShouldQueue
@@ -38,5 +40,19 @@ class SendEmail implements ShouldQueue
         $email = new EmailForQueuing();
         print_r("Sending data " . $this->data['email']);
         Mail::to($this->data['email'])->send($email);
+
+        $this->sendEmailLater();
+
+
     }
+
+
+    private function sendEmailLater()
+    {
+        $emailWithAttachment = new EmailWithAttachment();
+        $delay = Carbon::now()->addMinutes(1)->toString();
+
+        Mail::to($this->data['email'])->later($delay, $emailWithAttachment);
+    }
+
 }

@@ -15,7 +15,7 @@ $(document).ready(function () {
                     phone: phone,
                 },
                 success: function (data) {
-
+                    $('#success_message').append("Successfully send email " + email);
                 },
                 error: function (data, err) {
 

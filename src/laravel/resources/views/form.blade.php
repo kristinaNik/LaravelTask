@@ -2,6 +2,8 @@
 @section('content')
     <div class="col-md-12">
         <form id="client-form">
+            <p class="text-success" id="success_message"></p>
+            <p class="text-danger" id="danger_message"></p>
             <div class="form-group">
                 <label for="email">Enter email</label>
                 <input type="email" name="email" class="form-control" id="email">
