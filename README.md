@@ -5,7 +5,7 @@
  - **execute inside container php artisan command by running** - `docker exec -it laravel-task bash` 
     and then go to `cd app/`
  - get access to project using: http://laravel-task.local
- - **run** `npm run dev`
+
 
 ## For DB
  -  **copy** .env.example to your .env

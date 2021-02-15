@@ -29,7 +29,7 @@ class EmailWithAttachment extends Mailable
      */
     public function build()
     {
-        $img = File::get('public/image/mail_attachment.png');
+        $img = public_path('image/mail_attachment.png');
         return $this->view('emails/email')
             ->attach($img);
     }

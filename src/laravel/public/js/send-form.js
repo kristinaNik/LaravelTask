@@ -16,6 +16,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     $('#success_message').append("Successfully send email " + email);
+                    $("#client-form").reset();
                 },
                 error: function (data, err) {
 
