@@ -3,14 +3,16 @@
 namespace App\Services;
 
 use App\Jobs\SendEmail;
+use App\Jobs\SendSMS;
 
 class Consumer
 {
     /**
-     * @param array $email
+     * @param array $details
      */
-    public function consumeData(array $email): void
+    public function consumeData(array $details): void
     {
-        SendEmail::dispatch($email);
+        SendEmail::dispatch($details);
+        SendSMS::dispatch($details);
     }
 }

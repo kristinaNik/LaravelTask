@@ -36,7 +36,7 @@ class RegisterController extends Controller
     public function send(Request $request)
     {
         try {
-            $details = ['email' =>  $request->get('email')];
+            $details = ['email' =>  $request->get('email'), 'phone' => $request->get('phone')];
             $this->consumer->consumeData($details);
             return response()->json(['message' => 'Successfully send email'], 200);
         } catch (\Exception $exception) {
