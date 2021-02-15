@@ -6,6 +6,9 @@
     and then go to `cd app/`
  - get access to project using: http://laravel-task.local
  - **run** `npm run dev`
- 
+
+## For DB
+ - **run** `php artisan db:create laravel`
+ - **run** `php artisan migrate` 
 ## RabbitMQ
  - Go to http://localhost:15672/ to access the RabbitMQ management platform and observe rendering of the messages

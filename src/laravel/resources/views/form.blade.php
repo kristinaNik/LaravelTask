@@ -8,7 +8,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">Phone number</label>
-                <input type="number" name="phone" class="form-control" id="phone">
+                <input type="text" name="phone" class="form-control" id="phone">
             </div>
             <button type="submit" id="send" class="btn btn-primary">Submit</button>
         </form>

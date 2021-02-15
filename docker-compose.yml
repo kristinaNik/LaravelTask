@@ -37,3 +37,20 @@ services:
     volumes:
       - ./enabled_plugins:/var/lib/rabbitmq/enabled_plugins
     domainname: rabbitmq.local
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    volumes:
+      - ./dbdir:/var/lib/mysql
+    #mem_limit: 102400m
+    #cpu_shares: 20
+    #cpu_quota: 20000
+    #cpuset: 0,1
+    command: mysqld --sql_mode=""
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_SQL_MODE=""
+      - TZ=Europe/Sofia
+    hostname: db
+    restart: always
