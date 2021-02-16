@@ -47,7 +47,7 @@ class SendEmail implements ShouldQueue
     private function sendEmailLater()
     {
         $emailWithAttachment = new EmailWithAttachment();
-        $delay = Carbon::now()->addMinutes(1)->toDateTime();
+        $delay = Carbon::now()->addMinutes(15)->toDateTime();
 
         Mail::to($this->data['email'])->later($delay, $emailWithAttachment);
     }
