@@ -1,31 +1,11 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\RabbitMQServices;
 
 
-class Producer
+class Producer extends AbstractHandler
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
-
-    /**
-     * @var RabbitmqDTO
-     */
-    private $dto;
-
-    /**
-     * Producer constructor.
-     * @param HandleConnection $connection
-     */
-    public function __construct(HandleConnection $connection)
-    {
-        $this->connection = $connection::connect();
-        $this->dto = $connection::setDTO();
-    }
-
     public function produce($message)
     {
         $channel =  $this->connection->getChannel();

@@ -1,8 +1,5 @@
 <?php
-
-
-namespace App\Services;
-
+namespace App\Services\RabbitMQServices;
 
 class HandleConnection
 {

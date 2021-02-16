@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\RabbitMQServices;
 
 
 class RabbitmqDTO
@@ -42,6 +42,8 @@ class RabbitmqDTO
      */
     protected $deliveryMode;
 
+    protected $queueName;
+
 
     /**
      * Setup Producer.
@@ -60,6 +62,7 @@ class RabbitmqDTO
         $this->passive = $passive;
         $this->durable = $durable;
         $this->autoDelete = $autoDelete;
+        $this->queueName = getenv('RABBITMQ_QUEUE');
         $this->deliveryMode = $deliveryMode;
     }
 
@@ -109,6 +112,14 @@ class RabbitmqDTO
     public function getDeliveryMode(): int
     {
         return $this->deliveryMode;
+    }
+
+    /**
+     * @return array|false|string
+     */
+    public function getQueueName()
+    {
+        return $this->queueName;
     }
 
 

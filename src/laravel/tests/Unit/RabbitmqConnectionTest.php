@@ -3,13 +3,10 @@
 
 namespace Tests\Unit;
 
-
-use App\Services\Connection;
-use App\Services\HandleConnection;
-use App\Services\Producer;
-use Illuminate\Broadcasting\Channel;
+use App\Services\RabbitMQServices\Consumer;
+use App\Services\RabbitMQServices\HandleConnection;
+use App\Services\RabbitMQServices\Producer;
 use Mockery;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Tests\TestCase;
 
 class RabbitmqConnectionTest extends TestCase
@@ -24,19 +21,19 @@ class RabbitmqConnectionTest extends TestCase
     {
         $connection = new HandleConnection();
 
-        $this->assertEquals(30,  $connection::connect()->getHeartbeat());
+        $this->assertEquals(60,  $connection::connect()->getHeartbeat());
         $this->assertEquals(60, $connection::connect()->getInsist());
         $this->assertEquals(60, $connection->connect()->getLoginMethod());
         $this->assertEquals('/', $connection->connect()->getVhost());
-
     }
 
     public function testProducer()
     {
         $message = json_encode(['test' => 'message']);
         $producer = new Producer(new HandleConnection());
+        $consumer = new Consumer(new HandleConnection());
 
         $producer->produce($message);
-
+        $consumer->consume();
     }
 }
