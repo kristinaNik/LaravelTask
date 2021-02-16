@@ -6,18 +6,17 @@ namespace App\Services\RabbitMQServices;
 
 class Producer extends AbstractHandler
 {
+    /**
+     * @param $message
+     * @throws \Exception
+     */
     public function produce($message)
     {
         $channel =  $this->connection->getChannel();
 
-        try {
-            $channel->exchange_declare($this->connection, $this->dto->getExchange(), $this->dto->isPassive(), $this->dto->isDurable(), $this->dto->isAutoDelete());
-        } catch (\Exception $e) {
-            throw new \Exception("exchange failure");
-        }
+        $this->setQueueConfiguration();
 
-        $channel->basic_publish($message);
-
+        $channel->basic_publish($message, $this->dto->getExchange());
         echo ' [x] Data Sent to ', $this->dto->getExchange(), ' Exchange!', "\n";
 
         $channel->close();

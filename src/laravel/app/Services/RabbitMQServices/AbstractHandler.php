@@ -26,4 +26,20 @@ abstract class AbstractHandler
         $this->dto = $connection::setDTO();
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function setQueueConfiguration(): void
+    {
+        $this->connection->getChannel()->queue_declare($this->dto->getQueueName(), false, true, false, false);
+        try {
+            $this->connection->getChannel()->exchange_declare($this->connection, $this->dto->getExchange(), $this->dto->isPassive(), $this->dto->isDurable(), $this->dto->isAutoDelete());
+        } catch (\Exception $e) {
+            throw new \Exception("exchange failure");
+        }
+
+        $this->connection->getChannel()->queue_bind($this->dto->getQueueName(), $this->dto->getExchange());
+    }
+
+
 }
