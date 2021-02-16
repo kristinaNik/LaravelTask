@@ -10,10 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use Vonage\Message\Message;
-use Vonage\SMS\Message\SMS;
 
 class SendEmail implements ShouldQueue
 {
@@ -50,7 +47,7 @@ class SendEmail implements ShouldQueue
     private function sendEmailLater()
     {
         $emailWithAttachment = new EmailWithAttachment();
-        $delay = Carbon::now()->addMinutes(15)->toString();
+        $delay = Carbon::now()->addMinutes(1)->toDateTime();
 
         Mail::to($this->data['email'])->later($delay, $emailWithAttachment);
     }
