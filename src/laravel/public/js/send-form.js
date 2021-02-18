@@ -20,6 +20,9 @@ $(document).ready(function () {
                 },
                 error: function (data, err) {
 
+                    $.each(data.responseJSON.errors, function( index, value ) {
+                        $('#danger_message').append(value + "<br>");
+                    });
                 },
             });
         });

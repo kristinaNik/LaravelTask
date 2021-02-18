@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\SendFormParamsValidation;
 use App\Services\DispatchService;
 use Illuminate\Http\Request;
 
@@ -29,11 +30,10 @@ class RegisterController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param SendFormParamsValidation $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
-    public function send(Request $request)
+    public function send(SendFormParamsValidation $request)
     {
         try {
             $details = ['email' =>  $request->get('email'), 'phone' => $request->get('phone')];
