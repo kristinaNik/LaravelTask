@@ -2,13 +2,13 @@
 
  - **create a host name in your hosts file:** laravel-task.local
  - **run** `docker-compose up --build --force-recreate -d`
- - **execute inside container php artisan command by running** - `docker exec -it laravel-task bash` 
+ - **execute inside container php artisan command by running** - `docker-compose exec laravel-task bash` 
     and then go to `cd app/`
  - get access to project using: http://laravel-task.local
 
 
 ## For DB
- -  **copy** .env.example to your .env
+ - **copy** .env.example to your .env
  - **run** `php artisan db:create laravel`
  - **run** `php artisan migrate` 
  
